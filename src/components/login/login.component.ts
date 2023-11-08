@@ -1,47 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take, timeout, timer } from 'rxjs';
-import { UserData } from 'src/dataType/UserData';
+import { Subject } from 'rxjs';
+import { User } from 'src/dataType/interfaces';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit{
 
   loginForm = new FormGroup({
-    userName: new FormControl(''),
-    password: new FormControl('')
+    userName: new FormControl('', {nonNullable: true}),
+    password: new FormControl('', {nonNullable: true})
   })
+  showPassword: boolean;
+  errorMessage$: Subject<string>;
 
-  delayTimer = (intervalBegin: number, intervalEnd: number) => {
-    return timer(intervalBegin, intervalEnd);
+
+  constructor(private router: Router, private userService: UserService) {
+    this.showPassword = false;
+    this.errorMessage$ = new Subject();
   }
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {}
-  
-  getRandomTimeInterval() {
-    return Math.floor(Math.random() * (600 - 100) + 100);
+  ngOnInit(): void {
+    this.errorMessage$.next('');
   }
   
-  validateLoginUser(formValues: Partial<UserData>): void {
-    console.log('inside validateLoginUser');
-    //if(formValues.userName === "MAINT" && formValues.password === "safetyiskey") {
-    if(formValues.userName === "a" && formValues.password === "a") {
-      console.log(new Date())
+  getRandomTimeInterval = () => {
+    return Math.floor(Math.random() * 500 + 100); 
+  }
+  
+  validateLoginUser = (formValues: Partial<User>) => {
+    if(this.loginForm.invalid) return;
+    if(!!this.userService.checkUserExistsInList(formValues)) {
       setTimeout(() => {
         this.router.navigate(['/dashboard',formValues.userName])
       }, this.getRandomTimeInterval())
-      /* this.delayTimer(10000, 60000).pipe(
-        take(1)
-      ).subscribe((res) => {
-        console.log(new Date())
-        this.router.navigate(['/dashboard',formValues.userName])
-      }) */ 
+    } else {
+      this.errorMessage$.next('User does not exist');
+      setTimeout(() => {
+        this.errorMessage$.next('');
+      }, 3000);
     }
+  }
+
+  toggleShowPassword = () => {
+    this.showPassword = !this.showPassword;
   }
 }

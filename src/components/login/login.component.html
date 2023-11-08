@@ -1,24 +1,26 @@
-<div class="login-parent">
-    <div class="login-left"></div>
-    <div class="login-right">
-        <div class="login-form">
-            <form [formGroup]="loginForm" (ngSubmit)="validateLoginUser(loginForm.value)">
-                <div>
-                    <label for="userName">User Name</label>
-                    <input id="userName" type="text" formControlName="userName">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input id="password" type="password" formControlName="password">
-                </div>
-                <div>
-                    <input type="checkbox" name="rememberme">
-                    <label for="rememberme">Remember Me</label>
-                    <button>Forgot Password</button>
-                </div>
-                
-                <button type="submit">LOGIN</button>
-            </form>
+<div class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="validateLoginUser(loginForm.value)" autocomplete="off">
+        <h3>LOGIN</h3>
+        <div *ngIf="(errorMessage$ | async) !== ''" class="alert-danger error-msg">{{errorMessage$ | async}}</div>
+        <div class="input-field">
+            <input id="userName" type="text" name="userName" formControlName="userName" required role="presentation" autocomplete="new-userName">
+            <span></span>
+            <label for="userName">User Name</label>
         </div>
-    </div>
+        <div class="input-field">
+            <input id="password" name="password" [type]="showPassword ? 'text' : 'password'" formControlName="password" required role="presentation" autocomplete="new-password">
+            <i *ngIf="showPassword" class="fa fa-eye" (click)="showPassword= !showPassword"></i>
+            <i *ngIf="!showPassword" class="fa fa-eye-slash" (click)="showPassword= !showPassword"></i>
+            <span></span>
+            <label for="password">Password</label>
+        </div>
+        <div class="forgot-password">
+            Forgot Password?
+        </div>
+
+        <button class="login-submit-btn" type="submit" [disabled]="loginForm.invalid">LOGIN</button>
+        <div class="new-account-signup">
+            New member? <a href="#">Create Account</a>
+        </div>
+    </form>
 </div>

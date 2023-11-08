@@ -1,0 +1,44 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    background: url('https://im-mining.com/site/wp-content/uploads/2022/05/49592058341_d5f6a98c39_k.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    &:before {
+        content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+            opacity: .2; 
+      }
+}
+
+/* .container {
+    height: 100%;
+    width: 100%;
+    position: fixed; 
+}
+
+.container .contianer-background {
+    box-sizing: content-box;
+    padding-bottom: 300px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url('https://im-mining.com/site/wp-content/uploads/2022/05/49592058341_d5f6a98c39_k.jpg');
+    background-size: cover;
+    animation: bgmove 30s linear infinite;
+}
+
+@keyframes bgmove {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-200px);
+    }
+} */
