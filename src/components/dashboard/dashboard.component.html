@@ -1,10 +1,24 @@
 <div class="dashboard-container">
     <div class="user-profile">
-        <div class="user-name">Name: {{retrievedUser.name}}</div>
-        <div class="user-password">Age: {{retrievedUser.age}}</div>
+        <div class="user-label">
+
+            <div class="user-name">Name: </div>
+            <div class="user-dept">Department:</div>
+        </div>
+        <div class="user-data">
+            <div class="user-name">{{retrievedUser.name}}</div>
+            <div class="user-dept">{{retrievedUser.dept}}</div>
+        </div>
+
+
     </div>
     <div class="user-info">
-        <div class="user-edu"></div>
-        <div class="user-skills"></div>
+        <div class="user-edu">
+            {{retrievedUser.edu}}
+        </div>
+        <div class="user-skills">
+            {{retrievedUser.skills}}
+        </div>
     </div>
+
 </div>

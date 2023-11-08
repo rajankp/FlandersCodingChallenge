@@ -4,8 +4,22 @@
     background: url('https://im-mining.com/site/wp-content/uploads/2022/05/49592058341_d5f6a98c39_k.jpg') no-repeat;
     background-position: center;
     background-size: cover;
+
+    .flanders-logo{
+        position: absolute;
+        top: .5%;
+        left: 2%;
+        width: 100px;
+        height: 10vh;
+        
+        img {
+            padding: 10px;
+            opacity: .9;
+            background-image: linear-gradient(100deg,#002f4b,#95bce2);
+        }
+    }
     
-    &:before {
+    /* &:before {
         content: '';
             position: absolute;
             top: 0;
@@ -14,7 +28,7 @@
             left: 0;
             background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
             opacity: .2; 
-      }
+      } */
 }
 
 /* .container {

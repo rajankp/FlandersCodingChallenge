@@ -3,6 +3,7 @@ export interface User {
     password?: string;
     name?: string;
     age?: number;
-    edu?: [];
-    skills?: [];
+    dept?: string,
+    edu?: string[];
+    skills?: string[];
 }
